@@ -1,6 +1,8 @@
-from homework9.data.users import user
-from homework9.pages.registration_page import RegistrationPage
 
+
+from homework9.data.users import user
+
+from homework9.pages.registration_page import RegistrationPage
 
 def test_automation_form():
     registration_page = RegistrationPage()

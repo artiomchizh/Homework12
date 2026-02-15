@@ -1,7 +1,8 @@
 from pathlib import Path
-from selene import have
-from selene.support.shared import browser
+from selene import have, browser
 from homework9.data.users import User, user
+
+
 
 expected_gender = user.gender.value
 class RegistrationPage:
@@ -45,6 +46,7 @@ class RegistrationPage:
             .all('option').element_by(have.text(month_name)) \
             .click()
         browser.element(f'.react-datepicker__day--0{user.date_of_birth.day}').click()
+        browser.execute_script("window.scrollBy(0, 500)")
         self.subject.type(user.subject)
         browser.element('.subjects-auto-complete__menu').element('div').click()
         if user.hobbies == "Sports":
@@ -57,13 +59,16 @@ class RegistrationPage:
         self.file.send_keys(
             str(file_path.resolve()))
         self.address.type(user.address)
+
         browser.element('#react-select-3-input').type(user.state)
         browser.element('[id^="react-select-3-option-"]').click()
+
         browser.element('#react-select-4-input').type(user.city)
         browser.element('[id^="react-select-4-option-"]').click()
         return self
 
     def submit(self):
+
         browser.element('#submit').click()
 
     def should_registered_user_with(self, user:User):
